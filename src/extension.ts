@@ -2,9 +2,13 @@ import * as vscode from "vscode";
 import { handleInitStatusBarItemClick } from "./handlers/initProject";
 import { handleDeployStatusBarItemClick } from "./handlers/deployProject";
 import { RenderStatusBarItem } from "./components/statusbar/render";
-import { VsCodeCommands } from "./types";
 import { handleConfigureStatusBarItemClick } from "./handlers/configureLinkZip";
-import { configureCommandId, deployCommandId, initCommandId } from "./consts";
+import {
+  configureCommandId,
+  deployCommandId,
+  initCommandId,
+  loadingCommandId,
+} from "./consts";
 
 export function activate(context: vscode.ExtensionContext) {
   // Create status bar item
@@ -33,18 +37,23 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register the new command for handling input dialog
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      configureCommandId,
-      handleConfigureStatusBarItemClick
+    vscode.commands.registerCommand(configureCommandId, () =>
+      handleConfigureStatusBarItemClick(extStatusBarItem)
     )
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand(initCommandId, handleInitStatusBarItemClick)
+    vscode.commands.registerCommand(initCommandId, () =>
+      handleInitStatusBarItemClick(extStatusBarItem)
+    )
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      deployCommandId,
-      handleDeployStatusBarItemClick
+    vscode.commands.registerCommand(deployCommandId, () =>
+      handleDeployStatusBarItemClick(context, extStatusBarItem)
+    )
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand(loadingCommandId, () =>
+      vscode.window.showInformationMessage(`Deployment started`)
     )
   );
 
