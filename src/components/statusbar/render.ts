@@ -1,36 +1,51 @@
 import * as vscode from "vscode";
 import { loadLinkZipConfig } from "../../helpers/config";
-import {
-  configureCommandId,
-  deployCommandId,
-  initCommandId,
-  loadingCommandId,
-} from "../../consts";
+import { SupportedCommands } from "../../consts";
+
+export interface IUpdateStatusBar {
+  text: string;
+  tooltip: string;
+  color: string;
+  command: SupportedCommands;
+}
+export function UpdateStatusBar(
+  extStatusBarItem: vscode.StatusBarItem,
+  params: IUpdateStatusBar
+) {
+  extStatusBarItem.text = params.text;
+  extStatusBarItem.tooltip = params.tooltip;
+  extStatusBarItem.color = params.color;
+  extStatusBarItem.command = params.command;
+}
 
 export function RenderStatusBarItem(extStatusBarItem: vscode.StatusBarItem) {
-  if (extStatusBarItem.command != loadingCommandId) {
+  if (extStatusBarItem.command != SupportedCommands.loading) {
     const config = loadLinkZipConfig();
     if (config) {
-      const files = vscode.workspace
-        .findFiles("**/linkzip.json")
-        .then((file) => {
-          if (file.length > 0) {
-            extStatusBarItem.text = `LinkZip: Deploy Build`;
-            extStatusBarItem.tooltip = "Click to deploy project with LinkZip";
-            extStatusBarItem.color = "#FFFFFF"; // Set color for visibility
-            extStatusBarItem.command = deployCommandId; // Set the new command ID for the status bar item
-          } else {
-            extStatusBarItem.text = `LinkZip: Init Project`;
-            extStatusBarItem.tooltip = "Click to init project with LinkZip";
-            extStatusBarItem.color = "#FFFFFF"; // Set color for visibility
-            extStatusBarItem.command = initCommandId; // Set the new command ID for the status bar item
-          }
-        });
+      vscode.workspace.findFiles("**/linkzip.json").then((file) => {
+        if (file.length > 0) {
+          UpdateStatusBar(extStatusBarItem, {
+            color: "#FFFFFF",
+            tooltip: "Click to deploy project with LinkZip",
+            command: SupportedCommands.deploy,
+            text: "LinkZip: Deploy Build",
+          });
+        } else {
+          UpdateStatusBar(extStatusBarItem, {
+            color: "#FFFFFF",
+            tooltip: "Click to init project with LinkZip",
+            command: SupportedCommands.init,
+            text: "LinkZip: Init Project",
+          });
+        }
+      });
     } else {
-      extStatusBarItem.text = `$(gear) LinkZip: configure`;
-      extStatusBarItem.tooltip = "Click to configure LinkZip";
-      extStatusBarItem.color = "#E78895"; // Set color for visibility
-      extStatusBarItem.command = configureCommandId; // Set the new command ID for the status bar item
+      UpdateStatusBar(extStatusBarItem, {
+        color: "#E78895",
+        tooltip: "Click to configure LinkZip",
+        command: SupportedCommands.configure,
+        text: `$(gear) LinkZip: configure`,
+      });
     }
   }
 }

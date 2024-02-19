@@ -14,7 +14,6 @@ export function createProjectConfigFile(
 }
 
 export function loadProjectConfigFile(): ProjectConfig | null {
-  const homeDir = os.homedir();
   const configFilePath = path.join(getCurrentPath(), "/linkzip.json");
   console.log(configFilePath);
   try {
@@ -42,9 +41,13 @@ export function loadLinkZipConfig(): LinkZipConfig | null {
 
 export function saveLinkZipConfig(config: LinkZipConfig): void {
   const homeDir = os.homedir();
+  const configFolderPath = path.join(homeDir, systemConfig.configFolder);
+  if (!fs.existsSync(configFolderPath)) {
+    fs.mkdirSync(configFolderPath);
+  }
+
   const configFilePath = path.join(
-    homeDir,
-    systemConfig.configFolder,
+    configFolderPath,
     systemConfig.configFileName
   );
   const jsonData = JSON.stringify(config, null, 2);

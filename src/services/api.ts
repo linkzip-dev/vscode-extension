@@ -8,12 +8,12 @@ export function uploadBuild(
   linkZipConfig: LinkZipConfig,
   projectConfig: ProjectConfig,
   buildFile: string,
+  deployMessage: string,
   callback: (data: ApiResponse) => void
 ) {
   const apiURL = systemConfig.api;
   const parsed = new URL(buildFile, "file:///");
   const fileName = path.basename(parsed.pathname);
-  const deployMessage = "Vscode extension deploy";
   const options = {
     method: "POST",
     url: `${apiURL}/upload`,
