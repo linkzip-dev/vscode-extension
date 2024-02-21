@@ -1,9 +1,10 @@
 {
-	"name": "vscode-extension",
-	"displayName": "Visual Studio Code LinkZip extension",
-	"description": "Shows the number of selected lines in the status bar",
-	"version": "0.0.1",
+	"name": "linkzip-extension",
+	"displayName": "LinkZip",
+	"description": "LinkZip Extension is a powerful tool designed to streamline the deployment process of static content.",
+	"version": "1.0.0",
 	"publisher": "linkzip",
+	"icon": "icons/square_logo.png",
 	"private": true,
 	"license": "MIT",
 	"repository": {
