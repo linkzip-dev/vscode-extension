@@ -19,8 +19,8 @@ export function handleInitStatusBarItemClick(
           .showInputBox({ prompt: "Enter deploy folder path" })
           .then((buildDirectory) => {
             const projectConfig: ProjectConfig = {
-              projectId: projectId as string,
-              buildDirectory: buildDirectory as string,
+              project_id: projectId as string,
+              build_dir: buildDirectory as string,
             };
             createProjectConfigFile(projectConfig, newJsonFilePath);
             vscode.window.showInformationMessage(

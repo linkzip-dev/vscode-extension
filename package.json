@@ -2,7 +2,7 @@
 	"name": "linkzip-extension",
 	"displayName": "LinkZip",
 	"description": "LinkZip Extension is a powerful tool designed to streamline the deployment process of static content.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "linkzip",
 	"icon": "icons/square_logo.png",
 	"private": true,
@@ -20,6 +20,22 @@
 	"categories": [
 		"Other"
 	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "linkzip.configure",
+				"title": "LinkZip: Configure"
+			},
+			{
+				"command": "linkzip.init",
+				"title": "LinkZip: Init Project"
+			},
+			{
+				"command": "linkzip.deploy",
+				"title": "LinkZip: Deploy Build"
+			}
+		]
+	},
 	"activationEvents": [
 		"*"
 	],

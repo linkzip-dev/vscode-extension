@@ -19,7 +19,7 @@ export function uploadBuild(
     url: `${apiURL}/upload`,
     headers: {
       "X-AUTH-TOKEN": linkZipConfig["API-TOKEN"],
-      "X-AUTH-PROJECT": projectConfig.projectId,
+      "X-AUTH-PROJECT": projectConfig.project_id,
       "X-MESSAGE": deployMessage,
     },
     formData: {

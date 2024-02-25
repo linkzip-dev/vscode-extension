@@ -15,7 +15,6 @@ export function createProjectConfigFile(
 
 export function loadProjectConfigFile(): ProjectConfig | null {
   const configFilePath = path.join(getCurrentPath(), "/linkzip.json");
-  console.log(configFilePath);
   try {
     const jsonData = fs.readFileSync(configFilePath, "utf-8");
     return JSON.parse(jsonData);

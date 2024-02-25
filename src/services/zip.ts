@@ -11,8 +11,8 @@ export function zipBuild(
   projectConfig: ProjectConfig,
   callback: (newZipFile: string, pointer: number) => void
 ) {
-  const archiveFileName = buildArchiveFileName(projectConfig.projectId);
-  process.chdir(`${getCurrentPath()}/${projectConfig.buildDirectory}`);
+  const archiveFileName = buildArchiveFileName(projectConfig.project_id);
+  process.chdir(`${getCurrentPath()}/${projectConfig.build_dir}`);
 
   recursive(".", function (err, files) {
     if (err) {

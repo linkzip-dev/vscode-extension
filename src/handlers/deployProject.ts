@@ -44,13 +44,14 @@ export function handleDeployStatusBarItemClick(
         });
         return;
       }
+
       const buildFolderPath = path.join(
         getCurrentPath(),
-        projectConfig.buildDirectory
+        projectConfig.build_dir
       );
       if (!fs.existsSync(buildFolderPath)) {
         vscode.window.showErrorMessage(
-          `Project build folder ${projectConfig.buildDirectory} does not exists!`
+          `Project build folder ${projectConfig.build_dir} does not exists!`
         );
         UpdateStatusBar(extStatusBarItem, {
           color: "#FFFFFF",

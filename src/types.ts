@@ -1,6 +1,6 @@
 export type ProjectConfig = {
-  projectId: string;
-  buildDirectory: string;
+  project_id: string;
+  build_dir: string;
 };
 
 export type LinkZipConfig = {
